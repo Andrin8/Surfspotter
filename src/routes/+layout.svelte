@@ -1,5 +1,5 @@
 <script>
-  let { children } = $props();
+  export let children;
 </script>
 
 <div class="container mt-3">

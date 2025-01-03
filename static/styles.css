@@ -29,6 +29,10 @@ body {
     background-color: #005f8a;
     color: white !important;
   }
+  .nav-item + .nav-item {
+    margin-left: 20px;
+  }
+  
   
   /* Footer */
   footer {

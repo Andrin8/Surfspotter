@@ -1,5 +1,5 @@
 <script>
-  let { spot } = $props();
+  export let spot;
 </script>
 
 <div class="spot-card">
