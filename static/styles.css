@@ -1,0 +1,82 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+  }
+  
+  /* Header */
+  header {
+    background-color: #34576b;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+  }
+  
+  /* Bootstrap Overrides */
+  .nav-link.active {
+    background-color: #0077b6;
+    color: white !important;
+  }
+  
+  .nav-link:hover {
+    background-color: #005f8a;
+    color: white !important;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #34576b;
+    color: white;
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+  }
+  
+  
+  /* Spot Cards */
+  .spot-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s;
+    max-width: 300px;
+    margin: 10px;
+  }
+  
+  .spot-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .spot-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .spot-card h2 {
+    margin: 10px;
+    font-size: 1.5rem;
+  }
+  
+  .spot-card p {
+    margin: 5px 10px;
+    color: #555;
+  }
+  
+  /* Spot List */
+  .spot-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    padding: 20px;
+  }
+  

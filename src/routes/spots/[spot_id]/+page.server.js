@@ -1,17 +1,19 @@
+// src/routes/spots/[spot_id]/+server.js
 import db from "$lib/db.js";
 import { redirect } from "@sveltejs/kit";
 
 export async function load({ params }) {
   return {
-    movie: await db.getMovie(params.movie_id),
+    spot: await db.getSpot(params.spot_id),
   };
 }
 
 export const actions = {
   delete: async ({ request }) => {
     const data = await request.formData();
+    const id = data.get("id");
 
-    await db.deleteMovie(data.get("id"));
-    redirect(303, "/movies");
+    await db.deleteSpot(id); // Aufruf der Datenbankfunktion
+    throw redirect(303, "/spots"); // Erfolgreiche Weiterleitung
   },
 };

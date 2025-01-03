@@ -1,148 +1,104 @@
-import { MongoClient, ObjectId } from "mongodb"; // See https://www.mongodb.com/docs/drivers/node/current/quick-start/
+import { MongoClient, ObjectId } from "mongodb";
 import { DB_URI } from "$env/static/private";
 
 const client = new MongoClient(DB_URI);
-
 await client.connect();
-const db = client.db("Project"); // select database
+const db = client.db("Project");
 
 //////////////////////////////////////////
-// Movies
+// Spots
 //////////////////////////////////////////
 
-// Get all movies
-async function getMovies() {
-  let movies = [];
+// Get all spots
+async function getSpots() {
+  let spots = [];
   try {
-    const collection = db.collection("1");
-
-    // You can specify a query/filter here
-    // See https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/query-document/
+    const collection = db.collection("spots");
     const query = {};
-
-    // Get all objects that match the query
-    movies = await collection.find(query).toArray();
-    movies.forEach((movie) => {
-      movie._id = movie._id.toString(); // convert ObjectId to String
+    spots = await collection.find(query).toArray();
+    spots.forEach((spot) => {
+      spot._id = spot._id.toString(); // convert ObjectId to String
     });
   } catch (error) {
     console.log(error);
-    // TODO: errorhandling
   }
-  return movies;
+  return spots;
 }
 
-// Get movie by id
-async function getMovie(id) {
-  let movie = null;
+// Get spot by id
+async function getSpot(id) {
+  let spot = null;
   try {
-    const collection = db.collection("1");
-    const query = { _id: new ObjectId(id) }; // filter by id
-    movie = await collection.findOne(query);
-
-    if (!movie) {
-      console.log("No movie with id " + id);
-      // TODO: errorhandling
+    const collection = db.collection("spots");
+    const query = { _id: new ObjectId(id) };
+    spot = await collection.findOne(query);
+    if (!spot) {
+      console.log("No spot with id " + id);
     } else {
-      movie._id = movie._id.toString(); // convert ObjectId to String
+      spot._id = spot._id.toString();
     }
   } catch (error) {
-    // TODO: errorhandling
     console.log(error.message);
   }
-  return movie;
+  return spot;
 }
 
-// create movie
-// Example movie object:
-/* 
-{ 
-  title: "Das Geheimnis von Altura",
-  year: 2024,
-  length: "120 Minuten"
-} 
-*/
-async function createMovie(movie) {
-  movie.poster = "/images/placeholder.jpg"; // default poster
-  movie.actors = [];
-  movie.watchlist = false;
+// Create spot
+async function createSpot(spot) {
+  spot.image = "/images/placeholder.jpg";
   try {
-    const collection = db.collection("1");
-    const result = await collection.insertOne(movie);
-    return result.insertedId.toString(); // convert ObjectId to String
+    const collection = db.collection("spots");
+    const result = await collection.insertOne(spot);
+    return result.insertedId.toString();
   } catch (error) {
-    // TODO: errorhandling
     console.log(error.message);
   }
   return null;
 }
 
-// update movie
-// Example movie object:
-/* 
-{ 
-  _id: "6630e72c95e12055f661ff13",
-  title: "Das Geheimnis von Altura",
-  year: 2024,
-  length: "120 Minuten",
-  actors: [
-    "Lena Herzog",
-    "Maximilian Schröder",
-    "Sophia Neumann"
-  ],
-  poster: "/images/Altura.png",
-  watchlist: false
-} 
-*/
-// returns: id of the updated movie or null, if movie could not be updated
-async function updateMovie(movie) {
+// Update spot
+async function updateSpot(spot) {
   try {
-    let id = movie._id;
-    delete movie._id; // delete the _id from the object, because the _id cannot be updated
-    const collection = db.collection("1");
-    const query = { _id: new ObjectId(id) }; // filter by id
-    const result = await collection.updateOne(query, { $set: movie });
-
+    let id = spot._id;
+    delete spot._id;
+    const collection = db.collection("spots");
+    const query = { _id: new ObjectId(id) };
+    const result = await collection.updateOne(query, { $set: spot });
     if (result.matchedCount === 0) {
-      console.log("No movie with id " + id);
-      // TODO: errorhandling
+      console.log("No spot with id " + id);
     } else {
-      console.log("Movie with id " + id + " has been updated.");
+      console.log("Spot with id " + id + " has been updated.");
       return id;
     }
   } catch (error) {
-    // TODO: errorhandling
     console.log(error.message);
   }
   return null;
 }
 
-// delete movie by id
-// returns: id of the deleted movie or null, if movie could not be deleted
-async function deleteMovie(id) {
+// Delete spot by id
+async function deleteSpot(id) {
   try {
-    const collection = db.collection("1");
-    const query = { _id: new ObjectId(id) }; // filter by id
+    const collection = db.collection("spots");
+    const query = { _id: new ObjectId(id) };
     const result = await collection.deleteOne(query);
-
     if (result.deletedCount === 0) {
-      console.log("No movie with id " + id);
+      console.log("No spot with id " + id);
     } else {
-      console.log("Movie with id " + id + " has been successfully deleted.");
+      console.log("Spot with id " + id + " has been successfully deleted.");
       return id;
     }
   } catch (error) {
-    // TODO: errorhandling
     console.log(error.message);
   }
   return null;
 }
 
-// export all functions so that they can be used in other files
+// Export all functions
 export default {
-  getMovies,
-  getMovie,
-  createMovie,
-  updateMovie,
-  deleteMovie,
+  getSpots,
+  getSpot,
+  createSpot,
+  updateSpot,
+  deleteSpot,
 };

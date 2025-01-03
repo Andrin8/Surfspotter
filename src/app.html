@@ -6,16 +6,41 @@
 	<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	%sveltekit.head%
-	<title>ScreenStack</title>
+	<title>SurfSpotter</title>
+	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-		crossorigin="anonymous"></script>
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="%sveltekit.assets%/styles.css">
 </head>
 
 <body data-sveltekit-preload-data="hover">
-	<div style="display: contents">%sveltekit.body%</div>
+	<div class="container">
+		<header class="py-3 mb-4 border-bottom">
+			<div class="d-flex flex-wrap justify-content-center">
+				<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+					<span class="fs-4">SurfSpotter</span>
+				</a>
+				<ul class="nav nav-pills">
+					<li class="nav-item"><a href="/spots" class="nav-link active">Explore Spots</a></li>
+					<li class="nav-item"><a href="/spots/create" class="nav-link">Add New Spot</a></li>
+				</ul>
+			</div>
+		</header>
+		<main>
+			<div style="display: contents">%sveltekit.body%</div>
+		</main>
+		<footer class="pt-4 my-md-5 pt-md-5 border-top">
+			<div class="row">
+				<div class="col-12 col-md text-center">
+					<small class="d-block mb-3 text-muted">&copy; 2025 SurfSpotter</small>
+				</div>
+			</div>
+		</footer>
+	</div>
 </body>
 
 </html>
