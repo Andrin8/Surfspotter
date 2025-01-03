@@ -94,6 +94,94 @@ async function deleteSpot(id) {
   return null;
 }
 
+//////////////////////////////////////////
+// Review
+//////////////////////////////////////////
+
+// Get all reviews
+async function getReviews() {
+  let reviews = [];
+  try {
+    const collection = db.collection("reviews");
+    const query = {};
+    reviews = await collection.find(query).toArray();
+    reviews.forEach((review) => {
+      review._id = review._id.toString(); // convert ObjectId to String
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  return reviews;
+}
+
+// Get review by id
+async function getReview(id) {
+  let review = null;
+  try {
+    const collection = db.collection("reviews");
+    const query = { _id: new ObjectId(id) };
+    review = await collection.findOne(query);
+    if (!review) {
+      console.log("No review with id " + id);
+    } else {
+      review._id = review._id.toString();
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+  return review;
+}
+
+// Create review
+async function createReview(review) {
+  review.image = "/images/placeholder.jpg";
+  try {
+    const collection = db.collection("reviews");
+    const result = await collection.insertOne(review);
+    return result.insertedId.toString();
+  } catch (error) {
+    console.log(error.message);
+  }
+  return null;
+}
+
+// Update review
+async function updateReview(review) {
+  try {
+    let id = review._id;
+    delete review._id;
+    const collection = db.collection("reviews");
+    const query = { _id: new ObjectId(id) };
+    const result = await collection.updateOne(query, { $set: review });
+    if (result.matchedCount === 0) {
+      console.log("No review with id " + id);
+    } else {
+      console.log("Review with id " + id + " has been updated.");
+      return id;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+  return null;
+}
+
+// Delete review by id
+async function deleteReview(id) {
+  try {
+    const collection = db.collection("reviews");
+    const query = { _id: new ObjectId(id) };
+    const result = await collection.deleteOne(query);
+    if (result.deletedCount === 0) {
+      console.log("No review with id " + id);
+    } else {
+      console.log("Review with id " + id + " has been successfully deleted.");
+      return id;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+  return null;
+}
 // Export all functions
 export default {
   getSpots,
@@ -101,4 +189,10 @@ export default {
   createSpot,
   updateSpot,
   deleteSpot,
+  getReviews,
+  getReview,
+  createReview,
+  updateReview,
+  deleteReview,
+
 };
