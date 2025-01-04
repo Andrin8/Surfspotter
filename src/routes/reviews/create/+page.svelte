@@ -6,7 +6,7 @@
 <h1>Add a New Surf Review</h1>
 <form method="POST" class="my-3">
   <div class="mb-3">
-    <label for="spotId" class="form-label">SpotId*</label>
+    <label for="spotId" class="form-label">Spot*</label>
     <input name="spotId" class="form-control" type="text" value={form?.values?.spotId} required />
   </div>
 

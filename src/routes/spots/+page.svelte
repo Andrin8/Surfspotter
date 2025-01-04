@@ -1,7 +1,6 @@
 <script>
   import SpotCard from '$lib/components/SpotCard.svelte';
   import FavoritesList from '$lib/components/FavoritesList.svelte';
-
   export let data;
   let spots = data.spots;
 
