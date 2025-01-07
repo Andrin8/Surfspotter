@@ -17,7 +17,7 @@ async function getSpots() {
     const query = {};
     spots = await collection.find(query).toArray();
     spots.forEach((spot) => {
-      spot._id = spot._id.toString(); // convert ObjectId to String
+      spot._id = spot._id.toString();
     });
   } catch (error) {
     console.log(error);
@@ -106,7 +106,7 @@ async function getReviews() {
     const query = {};
     reviews = await collection.find(query).toArray();
     reviews.forEach((review) => {
-      review._id = review._id.toString(); // convert ObjectId to String
+      review._id = review._id.toString();
     });
   } catch (error) {
     console.log(error);

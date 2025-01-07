@@ -1,4 +1,4 @@
-// src/routes/spots/[spot_id]/+page.server.js
+
 import db from "$lib/db.js";
 import { redirect } from "@sveltejs/kit";
 
@@ -16,19 +16,19 @@ export const actions = {
     throw redirect(303, "/spots");
   },
 
-  // NEUE update-Action für Spots
+
   update: async ({ request }) => {
     const data = await request.formData();
     const id = data.get("id");
 
-    // Felder abfragen
+
     const name = data.get("name");
     const image = data.get("image");
     const location = data.get("location");
     const waveType = data.get("waveType");
     const difficulty = data.get("difficulty");
 
-    // Objekt zusammenbauen
+
     let updatedSpot = {
       _id: id,
       name,
@@ -38,10 +38,10 @@ export const actions = {
       difficulty
     };
 
-    // DB-Aufruf
+
     await db.updateSpot(updatedSpot);
 
-    // Zurück zur Spot-Übersicht
+
     throw redirect(303, "/spots");
   }
 };

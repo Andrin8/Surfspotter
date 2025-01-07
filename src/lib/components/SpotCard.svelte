@@ -5,12 +5,14 @@
 <div class="spot-card">
   <img src={spot.image} alt={spot.name} class="spot-image" />
   <h2>
-    <a href={`/spots/${spot._id}`} class="card-title no-underline">{spot.name}</a>
+    <a href={`/spots/${spot._id}`} class="card-title no-underline"
+      >{spot.name}</a
+    >
   </h2>
-  
+
   <p><strong>Location:</strong> {spot.location}</p>
   <p><strong>Wave Type:</strong> {spot.waveType}</p>
-  <p><strong>Difficulty:</strong> {spot.difficulty}</p> 
+  <p><strong>Difficulty:</strong> {spot.difficulty}</p>
 </div>
 
 <style>
@@ -30,7 +32,7 @@
   .no-underline {
     text-decoration: none;
   }
-  .no-underline:hover { 
+  .no-underline:hover {
     text-decoration: underline;
   }
 </style>

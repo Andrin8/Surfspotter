@@ -1,14 +1,12 @@
 <script>
-  import ReviewCard from '$lib/components/ReviewCard.svelte';
-  // Die von load() zurückgegebenen Daten kommen hier an
+  import ReviewCard from "$lib/components/ReviewCard.svelte";
+
   export let data;
   let reviews = data.reviews;
-  //let {data} = $props();
 </script>
 
 <h1>Reviews</h1>
 
-<!-- Wir gehen davon aus, dass du SpotCard in src/lib/components/SpotCard.svelte hast -->
 <div class="review-list">
   {#each reviews as review}
     <ReviewCard {review} />

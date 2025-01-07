@@ -1,43 +1,40 @@
 <script>
-  import SpotCard from '$lib/components/SpotCard.svelte';
-  import FavoritesList from '$lib/components/FavoritesList.svelte';
+  import SpotCard from "$lib/components/SpotCard.svelte";
+  import FavoritesList from "$lib/components/FavoritesList.svelte";
   export let data;
   let spots = data.spots;
 
-  // Initialisieren der Favoriten-Liste
   let favorites = [];
 
-  // Favoriten aus dem localStorage laden
-  if (typeof window !== 'undefined') {
-    const savedFavorites = localStorage.getItem('favorites');
+  if (typeof window !== "undefined") {
+    const savedFavorites = localStorage.getItem("favorites");
     if (savedFavorites) {
       favorites = JSON.parse(savedFavorites);
     }
   }
 
-  // Funktion zum Hinzufügen eines Spots zu den Favoriten
   function addFavorite(spot) {
-    if (!favorites.find(fav => fav.id === spot._id)) {
-      favorites = [...favorites, { id: spot._id, name: spot.name, location: spot.location }];
+    if (!favorites.find((fav) => fav.id === spot._id)) {
+      favorites = [
+        ...favorites,
+        { id: spot._id, name: spot.name, location: spot.location },
+      ];
       saveFavorites();
     }
   }
 
-  // Funktion zum Entfernen eines Spots aus den Favoriten
   function removeFavorite(id) {
-    favorites = favorites.filter(fav => fav.id !== id);
+    favorites = favorites.filter((fav) => fav.id !== id);
     saveFavorites();
   }
 
-  // Favoriten im localStorage speichern
   function saveFavorites() {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   }
 </script>
 
 <h1>Surf Spots</h1>
 
-<!-- Liste der Surf-Spots -->
 <div class="spot-list">
   {#each spots as spot}
     <div class="spot-item">
@@ -49,8 +46,10 @@
   {/each}
 </div>
 
-<!-- Favoriten-Liste -->
-<FavoritesList {favorites} on:removeFavorite={(event) => removeFavorite(event.detail.id)} />
+<FavoritesList
+  {favorites}
+  on:removeFavorite={(event) => removeFavorite(event.detail.id)}
+/>
 
 <style>
   .spot-list {

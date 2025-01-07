@@ -4,7 +4,6 @@
   export let favorites = [];
   const dispatch = createEventDispatcher();
 
-  // Ereignis senden, wenn ein Favorit entfernt werden soll
   function handleRemove(id) {
     dispatch("removeFavorite", { id });
   }
@@ -17,7 +16,10 @@
       {#each favorites as favorite}
         <li class="favorite-item">
           <span><strong>{favorite.name}</strong> - {favorite.location}</span>
-          <button on:click={() => handleRemove(favorite.id)} class="btn btn-danger btn-sm">
+          <button
+            on:click={() => handleRemove(favorite.id)}
+            class="btn btn-danger btn-sm"
+          >
             Remove
           </button>
         </li>

@@ -5,16 +5,13 @@
 
 <a href="/spots">Back</a>
 
-<!-- Zeigt die aktuellen Spot-Daten an -->
 <h1>{spot.name}</h1>
 <img src={spot.image} alt={spot.name} class="spot-image" />
 <p><strong>Location:</strong> {spot.location}</p>
 <p><strong>Wave Type:</strong> {spot.waveType}</p>
 <p><strong>Difficulty:</strong> {spot.difficulty}</p>
 
-<!-- Formular zum Bearbeiten des Spots -->
 <form method="POST" action="?/update" class="update-form">
-  <!-- Versteckte ID: wichtig fürs Update -->
   <input type="hidden" name="id" value={spot._id} />
 
   <div class="form-group">
@@ -39,13 +36,17 @@
 
   <div class="form-group">
     <label for="difficulty">Difficulty:</label>
-    <input id="difficulty" name="difficulty" type="text" value={spot.difficulty} />
+    <input
+      id="difficulty"
+      name="difficulty"
+      type="text"
+      value={spot.difficulty}
+    />
   </div>
 
   <button class="btn btn-primary" type="submit">Update Spot</button>
 </form>
 
-<!-- Minimaler Ansatz für das Löschen (schon vorhanden) -->
 <form method="POST" action="?/delete">
   <input type="hidden" name="id" value={spot._id} />
   <button class="btn btn-danger">Delete Spot</button>
